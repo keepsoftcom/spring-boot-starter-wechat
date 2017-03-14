@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>wechat-spring-boot-starter</module>
+        <module>wechat-spring-boot-autoconfigure</module>
+        <module>wechat-spring-boot-samples</module>
+    </modules>
+    
+	<groupId>com.github.wechat</groupId>
+	<artifactId>wechat-spring-boot</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+	<name>wechat springboot starter</name>
+	<description>springboot starter for wechat SDK</description>
+
+	<properties>
+        <main.basedir>${basedir}</main.basedir>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.7</java.version>
+        <file.encoding>UTF-8</file.encoding>
+        <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>2.4</maven-source-plugin.version>
+        <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+        <spring-boot.version>1.5.2.RELEASE</spring-boot.version>
+        <wechat-sdk.version>2.5.0</wechat-sdk.version>
+	</properties>
+
+    <dependencyManagement>
+    	<dependencies>
+    		<!--spring boot framework-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-mp</artifactId>
+                <version>${wechat-sdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.wechat</groupId>
+                <artifactId>wechat-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.wechat</groupId>
+                <artifactId>wechat-spring-boot-autoconfigure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+    	</dependencies>
+    </dependencyManagement>
+    <!--<distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>libs-releases</name>
+            <url>http://repo.example.com/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>libs-snapshots</name>
+            <url>http://repo.example.com/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>-->
+	<build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- this fix is needed for the eclipse-plugin to get the right java-version -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <compilerVersion>${java.version}</compilerVersion>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+	</build>
+</project>

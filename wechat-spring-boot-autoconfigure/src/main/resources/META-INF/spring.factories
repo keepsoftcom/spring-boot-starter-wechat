@@ -1,0 +1,2 @@
+# Auto configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.github.wechat.autoconfigure.WechatMpAutoConfiguration
